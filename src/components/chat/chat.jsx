@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState,useRef, useEffect } from "react"
 import "./chat.css"
 import EmojiPicker from "emoji-picker-react"
 
@@ -6,6 +6,14 @@ const Chat = () => {
 
     const [open,setOpen] = useState(false);
     const [text,setText] = useState("");
+
+    const endRef = useRef(null);
+
+    useEffect(() => {
+        endRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, []);
+
+
 
     const handleEmoji = e => {
         setText(prev => prev + e.emoji);
@@ -29,7 +37,96 @@ const Chat = () => {
                     <img src="./info.png" alt="" />
                 </div>
             </div>
-            <div className="center"></div>
+
+
+            <div className="center">
+                 <div className="message">
+                    <img src="./avatar.png" alt="" />
+                    <div className="texts">
+                        <p>Lorem ipsum dolor sit amet consectetur 
+                            adipisicing elit. Consequuntur 
+                            exercitationem aspernatur quod voluptas 
+                            eum ex at velit est numquam quis! 
+                            Adipisci accusamus mollitia, facere 
+                            laudantium voluptas quaerat nobis! 
+                            Enim, eveniet.
+                        </p>
+                        <span>1 min ago</span>
+                    </div>
+                 </div>
+                 <div className="message own">
+                    <div className="texts">
+                        <img src="data:image/jpeg;base64,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" alt="" />
+                        <p>Lorem ipsum dolor sit amet consectetur 
+                            adipisicing elit. Consequuntur 
+                            exercitationem aspernatur quod voluptas 
+                            eum ex at velit est numquam quis! 
+                            Adipisci accusamus mollitia, facere 
+                            laudantium voluptas quaerat nobis! 
+                            Enim, eveniet.
+                        </p>
+                        <span>1 min ago</span>
+                    </div>
+                 </div>
+                 <div className="message">
+                    <img src="./avatar.png" alt="" />
+                    <div className="texts">
+                        <p>Lorem ipsum dolor sit amet consectetur 
+                            adipisicing elit. Consequuntur 
+                            exercitationem aspernatur quod voluptas 
+                            eum ex at velit est numquam quis! 
+                            Adipisci accusamus mollitia, facere 
+                            laudantium voluptas quaerat nobis! 
+                            Enim, eveniet.
+                        </p>
+                        <span>1 min ago</span>
+                    </div>
+                 </div>
+                 <div className="message own">
+                    <div className="texts">
+                        <p>Lorem ipsum dolor sit amet consectetur 
+                            adipisicing elit. Consequuntur 
+                            exercitationem aspernatur quod voluptas 
+                            eum ex at velit est numquam quis! 
+                            Adipisci accusamus mollitia, facere 
+                            laudantium voluptas quaerat nobis! 
+                            Enim, eveniet.
+                        </p>
+                        <span>1 min ago</span>
+                    </div>
+                 </div>
+                 <div className="message">
+                    <img src="./avatar.png" alt="" />
+                    <div className="texts">
+                        <p>Lorem ipsum dolor sit amet consectetur 
+                            adipisicing elit. Consequuntur 
+                            exercitationem aspernatur quod voluptas 
+                            eum ex at velit est numquam quis! 
+                            Adipisci accusamus mollitia, facere 
+                            laudantium voluptas quaerat nobis! 
+                            Enim, eveniet.
+                        </p>
+                        <span>1 min ago</span>
+                    </div>
+                 </div>
+                 <div className="message own">
+                    <div className="texts">
+                        <p>Lorem ipsum dolor sit amet consectetur 
+                            adipisicing elit. Consequuntur 
+                            exercitationem aspernatur quod voluptas 
+                            eum ex at velit est numquam quis! 
+                            Adipisci accusamus mollitia, facere 
+                            laudantium voluptas quaerat nobis! 
+                            Enim, eveniet.
+                        </p>
+                        <span>1 min ago</span>
+                    </div>
+                 </div>
+                <div ref={endRef}></div>
+            </div>
+
+
+
             <div className="bottom">
                 <div className="icons">
                     <img src="./img.png" alt="" />
